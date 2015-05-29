@@ -31,3 +31,17 @@ header,nav,section,footer{
 nav span{
 	margin: 0 10px 0 0;
 }
+
+a{
+	text-decoration: none;
+}
+ul, li{
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+}
+
+.redes a{
+
+	color: #095F0E;
+}
