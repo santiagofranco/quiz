@@ -1,10 +1,18 @@
+var model = require('../models/models.js');
+
 exports.question = function(req, res) {
-	res.render('quizes/question', {pregunta : "Cual es la capital de Italia"});
+	model.Quiz.findAll().then(function  (quiz) {
+	res.render('quizes/question', {pregunta : quiz[0].pregunta});	
+	})
+	
 }
 
 exports.answer = function(req, res) {
-	if(req.query.respuesta.toUpperCase() === 'ROMA'){
+	model.Quiz.findAll().then(function  (quiz) {
+		if(req.query.respuesta.toUpperCase() === quiz[0].respuesta.toUpperCase()){
 		res.render('quizes/answer',{respuesta : 'Correcta'});
 	}else
 		res.render('quizes/answer',{respuesta : 'Incorrecta'});
+	})
+	
 };
