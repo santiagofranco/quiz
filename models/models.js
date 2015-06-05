@@ -35,8 +35,12 @@ seq.sync().then(function() {
 		// la tabla se inicializa solo si esta vacia
 		if(count === 0){
 			Quiz.create({
-				pregunta: "Capital de Italia",
-				respuesta: "Roma"
+				pregunta: "Capital de Francia",
+				respuesta: "Paris"
+			});
+			Quiz.create({
+				pregunta: "Capital de España",
+				respuesta: "Madrid"
 			})
 			.then(function  () {
 				console.log("Base de datos inicializada");

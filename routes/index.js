@@ -9,8 +9,12 @@ router.get('/', function(req, res) {
   res.render('index', { title: 'Quiz' });
 });
 
-router.get('/quizes/question',quizController.question);
-router.get('/quizes/answer',quizController.answer);
+//controlador referentes a las preguntas y sus respuestas
+router.get('/quizes',quizController.index);
+router.get('/quizes/:quizid(\\d+)',quizController.show);
+router.get('/quizes/:quizid(\\d+)/answer',quizController.answer);
+
+//controladores referentes al moverse por paginas estaticas
 router.get('/author', mediaController.creditos);
 
 module.exports = router;
