@@ -1,3 +1,9 @@
+<form action="/quizes" method="get">
+	<input type="text" name="search" required="required">
+	<input type="submit" value="Buscar">
+</form><br>
+
+
 <table>
 	<% quizes.forEach(function(quiz) {%>
 		<tr>
@@ -5,3 +11,5 @@
 		</tr>
 	<% }); %>
 </table>
+
+<a href="/quizes">Ver todas</a>

@@ -20,13 +20,28 @@ exports.load = function  (req, res, next, quizid) {
 
 
 exports.index = function  (req, res) {
-	model.Quiz.findAll().then(function  (quizes) {
+
+	if(req.query.search !== undefined){
+		var search = '%'+req.query.search.replace(" ","%")+'%';
+			model.Quiz.findAll({where: ["pregunta like ?", search]}).then(
+				function  (quizes) {
+					res.render('quizes/index',{
+					quizes : quizes
+					})
+				}).catch(function(error) {
+					next(error);
+				});
+	}else{
+		model.Quiz.findAll().then(function  (quizes) {
 		res.render('quizes/index',{
 			quizes : quizes
 		})
 	}).catch(function(error) {
 		next(error);
 	});
+	}
+
+	
 };
 
 exports.show = function(req, res) {
