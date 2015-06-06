@@ -23,7 +23,7 @@ exports.index = function  (req, res) {
 
 	if(req.query.search !== undefined){
 		var search = '%'+req.query.search.replace(" ","%")+'%';
-			model.Quiz.findAll({where: ["pregunta like ?", search]}).then(
+			model.Quiz.findAll({where: ["upper(pregunta) like ?", search.toUpperCase()]}).then(
 				function  (quizes) {
 					res.render('quizes/index',{
 					quizes : quizes
