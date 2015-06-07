@@ -4,8 +4,14 @@ module.exports = function  (seq , d) {
 	return seq.define(
 		'Quiz',
 		{
-			pregunta : d.STRING,
-			respuesta : d.STRING,
+			pregunta : {
+				type : d.STRING,
+				validate : { notEmpty : {msg: "-> Falta Pregunta!"}}
+			},
+			respuesta : {
+				type : d.STRING,
+				validate : { notEmpty : {msg: "-> Falta Respuesta!"}}
+			}
 		}
 	);
 }

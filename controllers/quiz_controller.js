@@ -26,7 +26,8 @@ exports.index = function  (req, res) {
 			model.Quiz.findAll({where: ["upper(pregunta) like ?", search.toUpperCase()]}).then(
 				function  (quizes) {
 					res.render('quizes/index',{
-					quizes : quizes
+					quizes : quizes,
+					errors : []
 					})
 				}).catch(function(error) {
 					next(error);
@@ -34,7 +35,8 @@ exports.index = function  (req, res) {
 	}else{
 		model.Quiz.findAll().then(function  (quizes) {
 		res.render('quizes/index',{
-			quizes : quizes
+			quizes : quizes,
+			errors : []
 		})
 	}).catch(function(error) {
 		next(error);
@@ -47,7 +49,8 @@ exports.index = function  (req, res) {
 exports.show = function(req, res) {
 	
 		res.render('quizes/show',{
-			quiz:req.quiz
+			quiz:req.quiz,
+			errors : []
 		});
 	
 };
@@ -58,7 +61,11 @@ exports.answer = function(req, res) {
 		resultado = 'Correcto';
 	}
 	
-	res.render('quizes/answer', { quiz : req.quiz, respuesta : resultado});
+	res.render('quizes/answer', { 
+		quiz : req.quiz, 
+		respuesta : resultado,
+		errors : []
+	});
 };
 
 
@@ -68,16 +75,26 @@ exports.new = function  (req , res) {
 			{pregunta : "Pregunta" , respuesta : "Respuesta"}
 		);
 
-	res.render('quizes/new',{quiz:quiz});
+	res.render('quizes/new',{quiz:quiz,errors : []});
 
 }
 
 exports.create = function  (req , res) {
 	var quiz = model.Quiz.build(req.body.quiz);
 
-	//Guardar en la BD solo los campos pregunta y respuesta y redireccionar a la lista de preguntas
-	quiz.save({fields: ["pregunta","respuesta"]}).then(function  () {
-		res.redirect('/quizes');
-	})
+	quiz.validate().then(
+		function  (err) {
+			if(err){
+				res.render('quizes/new',{ quiz:quiz, errors : err.errors});			
+			}else{
+				//Guardar en la BD solo los campos pregunta y respuesta y redireccionar a la lista de preguntas
+				quiz.save({fields: ["pregunta","respuesta"]}).then(function  () {
+					res.redirect('/quizes');
+				})
 
+			}
+		}
+	)
+
+	
 }
