@@ -16,6 +16,8 @@ router.param('quizid',quizController.load);
 router.get('/quizes',quizController.index);
 router.get('/quizes/:quizid(\\d+)',quizController.show);
 router.get('/quizes/:quizid(\\d+)/answer',quizController.answer);
+router.get('/quizes/new',quizController.new);
+router.post('/quizes/create',quizController.create);
 
 //controladores referentes al moverse por paginas estaticas
 router.get('/author', mediaController.creditos);

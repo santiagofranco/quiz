@@ -1,4 +1,5 @@
 node_modules/
 npm-debug.js
-npm-debub.log
+npm-debug.log
 .env
+*.txt

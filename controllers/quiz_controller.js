@@ -60,3 +60,24 @@ exports.answer = function(req, res) {
 	
 	res.render('quizes/answer', { quiz : req.quiz, respuesta : resultado});
 };
+
+
+exports.new = function  (req , res) {
+	
+	var quiz = model.Quiz.build(
+			{pregunta : "Pregunta" , respuesta : "Respuesta"}
+		);
+
+	res.render('quizes/new',{quiz:quiz});
+
+}
+
+exports.create = function  (req , res) {
+	var quiz = model.Quiz.build(req.body.quiz);
+
+	//Guardar en la BD solo los campos pregunta y respuesta y redireccionar a la lista de preguntas
+	quiz.save({fields: ["pregunta","respuesta"]}).then(function  () {
+		res.redirect('/quizes');
+	})
+
+}
