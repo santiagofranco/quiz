@@ -18,7 +18,9 @@ router.get('/quizes/:quizid(\\d+)',quizController.show);
 router.get('/quizes/:quizid(\\d+)/answer',quizController.answer);
 router.get('/quizes/new',quizController.new);
 router.post('/quizes/create',quizController.create);
-
+router.get('/quizes/:quizid(\\d+)/edit', quizController.edit);
+router.put('/quizes/:quizid(\\d+)', quizController.update);
+router.delete('/quizes/:quizid(\\d+)', quizController.destroy);
 //controladores referentes al moverse por paginas estaticas
 router.get('/author', mediaController.creditos);
 
