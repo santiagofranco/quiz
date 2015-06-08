@@ -1,3 +1,3 @@
 exports.creditos = function (req, res) {
-	res.render('hypermedia/creditos');
+	res.render('hypermedia/creditos', { errors : [] });
 }
