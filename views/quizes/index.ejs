@@ -7,7 +7,7 @@
 <table>
 	<% quizes.forEach(function(quiz) {%>
 		<tr>
-			<td><a href="quizes/<%= quiz.id %>"> <%= quiz.pregunta %></a></td>
+			<td><a href="quizes/<%= quiz.id %>"> <%= quiz.pregunta %>(<%=  quiz.categoria %> )</a></td>
 			<td><a href="/quizes/<%= quiz.id %>/edit"><button type="button">Editar</button></a></td>
 			<td>
 				<form action="/quizes/<%= quiz.id %>?_method=delete" method="post"><button type="submit" onClick="return confirm('Borrar: <%= quiz.pregunta %> ');"> Borrar</button></form>

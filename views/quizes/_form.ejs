@@ -3,6 +3,13 @@
 
 <label for="res" class="rem">Respuesta:</label>
 <input type="text" id="res" name="quiz[respuesta]" value="<%= quiz.respuesta %>">
+<select name="quiz[categoria]" id="cat">
+	<option value="Otro" selected>Otro</option>
+	<option value="Humanidades">Humanidades</option>
+	<option value="Ocio">Ocio</option>
+	<option value="Ciencia">Ciencia</option>
+	<option value="Tecnologia">Tecnología</option>
+</select>
 
 <a href="/quizes">Cancelar</a>
 

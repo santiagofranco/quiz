@@ -72,7 +72,7 @@ exports.answer = function(req, res) {
 exports.new = function  (req , res) {
 	
 	var quiz = model.Quiz.build(
-			{pregunta : "Pregunta" , respuesta : "Respuesta"}
+			{pregunta : "Pregunta" , respuesta : "Respuesta", categoria : "Categoria"}
 		);
 
 	res.render('quizes/new',{quiz:quiz,errors : []});
@@ -88,7 +88,7 @@ exports.create = function  (req , res) {
 				res.render('quizes/new',{ quiz:quiz, errors : err.errors});			
 			}else{
 				//Guardar en la BD solo los campos pregunta y respuesta y redireccionar a la lista de preguntas
-				quiz.save({fields: ["pregunta","respuesta"]}).then(function  () {
+				quiz.save({fields: ["pregunta","respuesta","categoria"]}).then(function  () {
 					res.redirect('/quizes');
 				})
 
@@ -111,6 +111,7 @@ exports.update = function  (req , res) {
 
 	req.quiz.pregunta = req.body.quiz.pregunta;
 	req.quiz.respuesta = req.body.quiz.respuesta;
+	req.quiz.categoria = req.body.quiz.categoria;
 
 	req.quiz.validate().then(
 			function  (err) {
@@ -119,7 +120,7 @@ exports.update = function  (req , res) {
 				}else{
 					req.quiz.save(
 					{
-						fields : ["pregunta", "respuesta"]
+						fields : ["pregunta", "respuesta", "categoria"]
 					}
 					).then(function(){
 						res.redirect('/quizes');
